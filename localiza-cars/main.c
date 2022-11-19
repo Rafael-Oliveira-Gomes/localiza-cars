@@ -7,15 +7,17 @@
 #include <assert.h>
 #include <ctype.h>
 #include <conio.h>
-#include "user.c"
-#include "menuCarro.c"
-#include "carros.c"
-#include "menuUser.c"
+#include "./Domain/user.c"
+#include "./Domain/menu.c"
+#include "./Domain/carros.c"
+
+
 int main()
 {
     setlocale(LC_ALL, "");
     setlocale(LC_ALL, "Portuguese");
     system("pause");
     system("cls || clear");
-    mostrarMenu();
+    menuUser();
 }
+

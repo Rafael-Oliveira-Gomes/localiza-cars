@@ -7,6 +7,8 @@
 #include <assert.h>
 #include <ctype.h>
 #include <conio.h>
+
+
 typedef struct Localiza
 {
     char nome[30];
@@ -27,7 +29,7 @@ void cadastro()
     printf("------------------------------------\n"
            "|  Sistema de cadastro de cliente  |\n"
            "------------------------------------\n");
-    arquivoLogin = fopen("login.txt", "ab");
+    arquivoLogin = fopen("./BD/login.txt", "ab");
     struct Localiza valores;
     int cont, i = 0;
     int retorno;
@@ -65,7 +67,7 @@ void cadastro()
         cadastro();
         return;
     case 2:
-        mostrarMenu();
+        menuUser();
         fclose(arquivoLogin);
         return;
     default:
@@ -79,7 +81,7 @@ void login()
     int i = 0, retorno = 1, cont = 0;
     char nome[30];
     char senha[30];
-    arquivoLogin = fopen("login.txt", "rb");
+    arquivoLogin = fopen("./BD/login.txt", "rb");
     printf("Digite o seu login:\n");
     scanf("%s", &nome);
     printf("Digite a sua senha:\n");
@@ -92,7 +94,7 @@ void login()
         {
             if (strcmp(senha, max[i].senha) == 0)
             {
-                menu();
+                menuCarros();
                 return;
             }
         }
@@ -109,7 +111,7 @@ void login()
     printf("================");
     printf("\n");
     system("clear||cls");
-    return mostrarMenu();
+    return menuUser();
 }
 
 void Excluir()
@@ -127,18 +129,18 @@ void Excluir()
     {
         if (apagar == 's' || apagar == 'S')
         {
-            arquivoLogin = fopen("login.txt", "w++");
+            arquivoLogin = fopen("./BD/login.txt", "w++");
             fclose(arquivoLogin);
             printf("Feito exclusao como solicitado");
             system("color 0F");
-            return mostrarMenu();
+            return menuUser();
             system("clear||cls");
         }
         if (apagar == 'n' || apagar == 'N')
         {
             printf("Nenhum dado foi apagado!\n\n\n\n");
             system("color 0F");
-            return mostrarMenu();
+            return menuUser();
             system("clear||cls");
         }
     }
@@ -147,7 +149,7 @@ void mostrarUser()
 {
     int i = 0, retorno = 1, cont = 0;
     char nome[100], op;
-    arquivoLogin = fopen("login.txt", "rb");
+    arquivoLogin = fopen("./BD/login.txt", "rb");
     if (arquivoLogin == NULL)
     {
         printf(" Erro!\nO arquivo da lista não pode ser aberto! \n");
@@ -180,5 +182,5 @@ void mostrarUser()
     printf("================");
     printf("\n");
     system("clear||cls");
-    return mostrarMenu();
+    return menuUser();
 }

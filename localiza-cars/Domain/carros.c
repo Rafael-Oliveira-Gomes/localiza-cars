@@ -7,6 +7,8 @@
 #include <assert.h>
 #include <ctype.h>
 #include <conio.h>
+
+
 typedef struct Carro
 {
     char carroInput[30];
@@ -14,7 +16,10 @@ typedef struct Carro
     int valor[30];
     char deletado[30];
 } carros;
+
 FILE *automoveis;
+
+
 void incluirCarros(void);
 void excluirCarros(void);
 void consultarCarros(void);
@@ -24,7 +29,7 @@ void incluirCarros()
 {
     struct Carro carros;
     int retorno, continuar;
-    automoveis = fopen("carros.txt", "ab");
+    automoveis = fopen("./BD/carros.txt", "ab");
     printf("Qual o nome do carro?\n");
     scanf("%s", &carros.carroInput);
     printf("Digite se o carro eh automatico ou manual: \n");
@@ -46,7 +51,7 @@ void incluirCarros()
             incluirCarros();
             return;
         case 2:
-            menu();
+            menuCarros();
             fclose(automoveis);
             return;
         default:
@@ -71,19 +76,19 @@ void excluirCarros()
     {
         if (apagar == 's' || apagar == 'S')
         {
-            automoveis = fopen("carros.txt", "w++");
+            automoveis = fopen("./BD/carros.txt", "w++");
 
             fclose(automoveis);
             printf("Feito exclusao como solicitado");
             system("color 0F");
-            return menu();
+            return menuCarros();
             system("clear||cls");
         }
         if (apagar == 'n' || apagar == 'N')
         {
             printf("Nenhum dado foi apagado!\n\n\n\n");
             system("color 0F");
-            return menu();
+            return menuCarros();
             system("clear||cls");
         }
     }
@@ -94,7 +99,7 @@ void consultarCarros()
 {
 int i = 0, retorno = 1, cont = 0;
     char nome[100], op;
-    automoveis = fopen("carros.txt", "rb");
+    automoveis = fopen("./BD/carros.txt", "rb");
     if (automoveis == NULL)
     {
         printf(" Erro!\nO arquivo da lista não pode ser aberto! \n");
@@ -127,7 +132,7 @@ int i = 0, retorno = 1, cont = 0;
     printf("================");
     printf("\n");
     system("clear||cls");
-    return menu();
+    return menuCarros();
 }
 
 void alterarCarros()
@@ -136,7 +141,7 @@ void alterarCarros()
     struct Carro carros;
     int i = 0, retorno = 1, cont = 0;
     char carro[30];
-    automoveis = fopen("carros.txt", "r+b");
+    automoveis = fopen("./BD/carros.txt", "r+b");
     printf("Digite o nome do carro para buscar:\n");
     scanf("%s", &carro);
     retorno = fread(&maxcar[i], sizeof(carros), 1, automoveis);
@@ -159,7 +164,7 @@ void alterarCarros()
             fseek(automoveis, sizeof(carros) * 0, SEEK_END);
             retorno = 2;
             printf("Dados alterados!!");
-            menu();
+            menuCarros();
             system("cls || clear");
         }
     }
@@ -175,5 +180,5 @@ void alterarCarros()
     printf("================");
     printf("\n");
     system("clear||cls");
-    return menu();
+    return menuCarros();
 }
