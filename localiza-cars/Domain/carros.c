@@ -8,7 +8,6 @@
 #include <ctype.h>
 #include <conio.h>
 
-
 typedef struct Carro
 {
     char carroInput[30];
@@ -18,7 +17,6 @@ typedef struct Carro
 } carros;
 
 FILE *automoveis;
-
 
 void incluirCarros(void);
 void excluirCarros(void);
@@ -37,6 +35,7 @@ void incluirCarros()
     printf("Digite o valor do carro:\n");
     scanf("%d", &carros.valor);
     retorno = fwrite(&carros, sizeof(carros), 1, automoveis);
+    fclose(automoveis);
     if (retorno == 1)
     {
         fclose(automoveis);
@@ -97,7 +96,7 @@ void excluirCarros()
 carros maxcar[100];
 void consultarCarros()
 {
-int i = 0, retorno = 1, cont = 0;
+    int i = 0, retorno = 1, cont = 0;
     char nome[100], op;
     automoveis = fopen("./BD/carros.txt", "rb");
     if (automoveis == NULL)

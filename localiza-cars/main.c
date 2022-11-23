@@ -11,13 +11,11 @@
 #include "./Domain/menu.c"
 #include "./Domain/carros.c"
 
-
 int main()
 {
+    system("color FD");
     setlocale(LC_ALL, "");
     setlocale(LC_ALL, "Portuguese");
-    system("pause");
     system("cls || clear");
-    menuUser();
+    inicio();
 }
-
