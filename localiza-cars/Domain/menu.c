@@ -1,21 +1,52 @@
+#include <setjmp.h>
+
+#define TRY                     \
+    do                          \
+    {                           \
+        jmp_buf buf_state;      \
+        if (!setjmp(buf_state)) \
+        {
+#define CATCH \
+    }         \
+    else      \
+    {
+#define ENDTRY \
+    }          \
+    }          \
+    while (0)
+#define THROW longjmp(buf_state, 1)
+
 void menuCarros(void);
 void menuUser(void);
 void inicio(void);
+void sair(void);
 
 void menuUser()
 {
-    int opcao = 0;
+    char opcao[] = "";
     printf("LOCALIZA CARS\n\n");
     printf("Seja bem vindo ao nosso programa!!!\n\n");
     printf("1. Cadastro de Cliente\n");
     printf("2. Login\n");
     printf("3. Excluir todos os usuarios\n");
     printf("4. Para procurar um usuario:\n");
-    printf("5. Esqueci minha senha\n");
-    printf("0. Sair do Programa\n");
-    scanf("%d", &opcao);
+    // printf("5. Esqueci minha senha\n");
+    printf("9. Sair do Programa\n");
+    scanf("%c", &opcao);
     system("clear||cls");
-    switch (opcao)
+
+    int opcaoInt;
+    TRY
+    {
+        opcaoInt = atoi(opcao);
+    }
+    CATCH
+    {
+        opcaoInt = 999;
+    }
+    ENDTRY;
+
+    switch (opcaoInt)
     {
     case 1:
         cadastro();
@@ -32,27 +63,43 @@ void menuUser()
     case 4:
         mostrarUser();
         return;
-    case 5:
-        alterarUser();
+    // case 5:
+    // alterarUser();
+    // return;
+    case 9:
+        sair();
         return;
     default:
         printf("\n----------------------\n");
-        break;
+        printf("*** Opcao invalida. ***");
+        printf("\n----------------------\n\n");
+        return menuUser();
     }
 }
 
 void menuCarros()
 {
-    int opcao = 0;
+    char opcao[] = "";
     printf("\t\t\t\t\t\tBEM VINDO AO SISTEMA DOS CARROS E VENDEDORES\n");
     printf("\t\t\t\t\t\tESCOLHA UMA OPCAO E APERTE ENTER\n");
     printf("1. Fazer devolucao do carro.(Incluir)\n");
     printf("2. Trocar de carro (Alterar)\n");
     printf("3. Excluir\n");
     printf("4. Visualizar carros\n");
-    scanf("%d", &opcao);
+    printf("5. Voltar.\n");
+    scanf("%c", &opcao);
     system("clear||cls");
-    switch (opcao)
+    int opcaoInt;
+    TRY
+    {
+        opcaoInt = atoi(opcao);
+    }
+    CATCH
+    {
+        opcaoInt = 999;
+    }
+    ENDTRY;
+    switch (opcaoInt)
     {
     case 1:
         incluirCarros();
@@ -66,9 +113,22 @@ void menuCarros()
     case 4:
         consultarCarros();
         return;
+    case 5:
+        menuUser();
+        return;
     default:
-        break;
+        printf("\n----------------------\n");
+        printf("*** Opcao invalida. ***");
+        printf("\n----------------------\n\n");
+        return menuCarros();
     }
+}
+void sair()
+{
+    printf("\t\t\t\t\tObrigado por usar nosso sistema :)\n");
+    printf("\n\n\n\nPara suporte:\n");
+    printf("\t\t\t\t\t\tRafael de Oliveira\n\t\t\t\t\t\tRobert Novaes\n\t\t\t\t\t\tGabrielle Aoki\n\t\t\t\t\t\tLarissa Soares\n\t\t\t\t\t\tRayane Bispo\n\t\t\t\t\t\tMaria Eduarda\n");
+    system("pause>nul");
 }
 
 void inicio()
