@@ -30,7 +30,7 @@ void menuUser()
     printf("2. Login\n");
     printf("3. Excluir todos os usuarios\n");
     printf("4. Para procurar um usuario:\n");
-    printf("5. Esqueci minha senha\n");
+    // printf("5. Esqueci minha senha\n");
     printf("9. Sair do Programa\n");
     scanf("%c", &opcao);
     system("clear||cls");
@@ -63,15 +63,15 @@ void menuUser()
     case 4:
         mostrarUser();
         return;
-    case 5:
-        alterarUser();
-        return;
+    // case 5:
+    // alterarUser();
+    // return;
     case 9:
         sair();
         return;
     default:
         printf("\n----------------------\n");
-        printf("*** Opcao inválida. ***");
+        printf("*** Opcao invalida. ***");
         printf("\n----------------------\n\n");
         return menuUser();
     }
@@ -86,6 +86,7 @@ void menuCarros()
     printf("2. Trocar de carro (Alterar)\n");
     printf("3. Excluir\n");
     printf("4. Visualizar carros\n");
+    printf("5. Voltar.\n");
     scanf("%c", &opcao);
     system("clear||cls");
     int opcaoInt;
@@ -112,9 +113,12 @@ void menuCarros()
     case 4:
         consultarCarros();
         return;
+    case 5:
+        menuUser();
+        return;
     default:
         printf("\n----------------------\n");
-        printf("*** Opcao inválida. ***");
+        printf("*** Opcao invalida. ***");
         printf("\n----------------------\n\n");
         return menuCarros();
     }
