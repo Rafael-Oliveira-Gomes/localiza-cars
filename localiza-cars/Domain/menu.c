@@ -127,7 +127,7 @@ void sair()
 {
     printf("\t\t\t\t\tObrigado por usar nosso sistema :)\n");
     printf("\n\n\n\nPara suporte:\n");
-    printf("\t\t\t\t\t\tRafael de Oliveira\n\t\t\t\t\t\tRobert Novaes\n\t\t\t\t\t\tGabrielle Aoki\n\t\t\t\t\t\tLarissa Soares\n\t\t\t\t\t\tRayane Bispo\n\t\t\t\t\t\tMaria Eduarda\n");
+    printf("\t\t\t\t\t\tRafael de Oliveira\n");
     system("pause>nul");
 }
 
